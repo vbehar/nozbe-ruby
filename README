@@ -10,6 +10,10 @@ To run the specs, see the README in the spec dir.
 To install as a gem, see the INSTALL file.
 
 
+Dependencies :
+- json
+
+
 Usage : 
 
 require 'rubygems'
