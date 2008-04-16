@@ -1,0 +1,9 @@
+
+RSpec
+
+To run the specs, you need RSpec : 'sudo gem install rspec'
+
+Then, just type 'spec spec/nozbe_* -f s'
+
+hopefully, everything should be ok...
+

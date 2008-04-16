@@ -1,0 +1,4 @@
+# ignore generated gem
+pkg
+# ignore netbeans files
+nbproject
