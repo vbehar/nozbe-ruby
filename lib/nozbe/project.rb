@@ -10,6 +10,7 @@ module Nozbe
     
     def self.get_from_name(user_key, project_name)
       projects = list(user_key)
+      project_name = '' if project_name.nil?
       selected_projects = projects.select { |p| p.name.downcase == project_name.downcase }
       if selected_projects and !selected_projects.empty?
         selected_projects.first

@@ -19,6 +19,12 @@ describe Nozbe::Context do
     context.name.downcase.should eql(context_name.downcase)
   end
   
+  it "should get a context from its name even if the name is nil" do
+    context = Nozbe::Context.get_from_name(user_key, nil)
+    context.should_not eql(nil)
+    context.class.should eql(Nozbe::Context)
+  end
+  
   it "should list all contexts" do
     contexts = Nozbe::Context.list(user_key)
     contexts.class.should eql(Array)
