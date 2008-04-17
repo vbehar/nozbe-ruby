@@ -1,14 +1,21 @@
 module Nozbe
   class Context
-    DEFAULT_CONTEXT_NAME = "no context"
+    DEFAULT_CONTEXT_NAME = "No context"
 
     attr_accessor :id, :name, :icon, :body, :body_show, :count
     
     def self.get_default_context(user_key)
+      get_from_name(user_key, DEFAULT_CONTEXT_NAME)
+    end
+    
+    def self.get_from_name(user_key, context_name)
       contexts = list(user_key)
-      selected_contexts = contexts.select { |c| c.name.downcase == DEFAULT_CONTEXT_NAME }
-      selected_contexts.first if selected_contexts and !selected_contexts.empty?
-      contexts.first
+      selected_contexts = contexts.select { |c| c.name.downcase == context_name.downcase }
+      if selected_contexts and !selected_contexts.empty?
+        selected_contexts.first
+      else
+        contexts.first
+      end
     end
     
     def self.list(user_key)

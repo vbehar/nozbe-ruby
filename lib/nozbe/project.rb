@@ -1,14 +1,21 @@
 module Nozbe
   class Project
-    DEFAULT_PROJECT_NAME = "inbox"
+    DEFAULT_PROJECT_NAME = "Inbox"
     
     attr_accessor :id, :name, :body, :body_show, :count
     
     def self.get_default_project(user_key)
+      get_from_name(user_key, DEFAULT_PROJECT_NAME)
+    end
+    
+    def self.get_from_name(user_key, project_name)
       projects = list(user_key)
-      selected_projects = projects.select { |p| p.name.downcase == DEFAULT_PROJECT_NAME }
-      selected_projects.first if selected_projects and !selected_projects.empty?
-      projects.first
+      selected_projects = projects.select { |p| p.name.downcase == project_name.downcase }
+      if selected_projects and !selected_projects.empty?
+        selected_projects.first
+      else
+        projects.first
+      end
     end
     
     def self.list(user_key)

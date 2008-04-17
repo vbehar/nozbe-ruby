@@ -12,6 +12,13 @@ describe Nozbe::Context do
     default_context.class.should eql(Nozbe::Context)
   end
   
+  it "should get a context from its name" do
+    context_name = 'Mail'
+    context = Nozbe::Context.get_from_name(user_key, context_name)
+    context.class.should eql(Nozbe::Context)
+    context.name.downcase.should eql(context_name.downcase)
+  end
+  
   it "should list all contexts" do
     contexts = Nozbe::Context.list(user_key)
     contexts.class.should eql(Array)

@@ -12,6 +12,13 @@ describe Nozbe::Project do
     default_project.class.should eql(Nozbe::Project)
   end
   
+  it "should get a project from its name" do
+    project_name = 'Inbox'
+    project = Nozbe::Project.get_from_name(user_key, project_name)
+    project.class.should eql(Nozbe::Project)
+    project.name.downcase.should eql(project_name.downcase)
+  end
+  
   it "should list all projects" do
     projects = Nozbe::Project.list(user_key)
     projects.class.should eql(Array)
