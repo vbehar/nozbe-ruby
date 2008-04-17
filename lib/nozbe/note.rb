@@ -16,7 +16,7 @@ module Nozbe
   end
   
   class NotesListApiCall < Nozbe::ApiCall
-    action :actions
+    action :notes
     def parse(json)
       notes = super(json)
       notes.collect do |raw_note|
