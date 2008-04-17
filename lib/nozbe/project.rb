@@ -1,6 +1,15 @@
 module Nozbe
   class Project
+    DEFAULT_PROJECT_NAME = "inbox"
+    
     attr_accessor :id, :name, :body, :body_show, :count
+    
+    def self.get_default_project(user_key)
+      projects = ProjectsListApiCall.new(user_key).call
+      selected_projects = projects.select { |p| p.name.downcase == DEFAULT_PROJECT_NAME }
+      selected_projects.first if selected_projects and !selected_projects.empty?
+      projects.first
+    end
     
     def self.list(user_key)
       ProjectsListApiCall.new(user_key).call

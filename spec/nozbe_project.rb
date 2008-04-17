@@ -7,6 +7,11 @@ describe Nozbe::Project do
     @project = Nozbe::Project.list(user_key).first
   end
   
+  it "should get a default project" do
+    default_project = Nozbe::Project.get_default_project(user_key)
+    default_project.class.should eql(Nozbe::Project)
+  end
+  
   it "should list all projects" do
     projects = Nozbe::Project.list(user_key)
     projects.class.should eql(Array)
