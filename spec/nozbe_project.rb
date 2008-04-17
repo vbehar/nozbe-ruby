@@ -23,12 +23,14 @@ describe Nozbe::Project do
     actions = @project.get_actions(user_key)
     actions.class.should eql(Array)
     actions.first.class.should eql(Nozbe::Action)
+    actions.first.project.should eql(@project)
   end
   
   it "should get all associated notes" do
     notes = @project.get_notes(user_key)
     notes.class.should eql(Array)
     notes.first.class.should eql(Nozbe::Note)
+    notes.first.project.should eql(@project)
   end
   
   it "should save itself" do

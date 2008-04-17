@@ -23,12 +23,14 @@ describe Nozbe::Context do
     actions = @context.get_actions(user_key)
     actions.class.should eql(Array)
     actions.first.class.should eql(Nozbe::Action)
+    actions.first.context.should eql(@context)
   end
   
   it "should get all associated notes" do
     notes = @context.get_notes(user_key)
     notes.class.should eql(Array)
     notes.first.class.should eql(Nozbe::Note)
+    notes.first.context.should eql(@context)
   end
   
 end
