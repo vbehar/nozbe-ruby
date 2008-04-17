@@ -11,11 +11,17 @@ module Nozbe
     end
     
     def get_actions(user_key, showdone = false)
-      Nozbe::Action.list_for_context(user_key, id, showdone)
+      Nozbe::Action.list_for_context(user_key, id, showdone).collect { |action|
+        action.context = self
+        action
+      }
     end
     
     def get_notes(user_key)
-      Nozbe::Note.list_for_context(user_key, id)
+      Nozbe::Note.list_for_context(user_key, id).collect { |note|
+        note.context = self
+        note
+      }
     end
   end
   

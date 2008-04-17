@@ -11,11 +11,17 @@ module Nozbe
     end
     
     def get_actions(user_key, showdone = false)
-      Nozbe::Action.list_for_project(user_key, id, showdone)
+      Nozbe::Action.list_for_project(user_key, id, showdone).collect { |action|
+        action.project = self
+        action
+      }
     end
     
     def get_notes(user_key)
-      Nozbe::Note.list_for_project(user_key, id)
+      Nozbe::Note.list_for_project(user_key, id).collect { |note|
+        note.project = self
+        note
+      }
     end
     
     def save!(user_key)
