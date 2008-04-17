@@ -27,12 +27,13 @@ module Nozbe
     end
 
     def do_request()
-      response = Net::HTTP.get_response(URI.parse(API_BASE_URL + build_request_path()))
+      uri = URI.parse(API_BASE_URL + build_request_path())
+      response = Net::HTTP.get_response(uri)
       response.body
     end
 
     def parse(json)
-      JSON.parse(json)
+      JSON.parse(json) rescue nil
     end
 
     def build_request_path()

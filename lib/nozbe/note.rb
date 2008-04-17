@@ -2,6 +2,12 @@ module Nozbe
   class Note
     attr_accessor :id, :name, :body, :body_show, :date, :project, :context
     
+    def self.list(user_key)
+      Nozbe::Project.list(user_key).inject([]) { |all_notes, project|
+        all_notes + project.get_notes(user_key)
+      }
+    end
+    
     def self.list_for_project(user_key, project_id)
       NotesListApiCall.new(user_key, {:what => :project, :id => project_id}).call
     end
@@ -19,6 +25,7 @@ module Nozbe
     action :notes
     def parse(json)
       notes = super(json)
+      return [] if notes.nil?
       notes.collect do |raw_note|
         note = Note.new
         note.id = raw_note["id"]

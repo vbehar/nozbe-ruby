@@ -2,6 +2,12 @@ module Nozbe
   class Action
     attr_accessor :id, :name, :name_show, :done, :done_time, :time, :next, :project, :context
     
+    def self.list(user_key, showdone = false)
+      Nozbe::Project.list(user_key).inject([]) { |all_actions, project|
+        all_actions + project.get_actions(user_key, showdone)
+      }
+    end
+    
     def self.list_next(user_key)
       ActionsListApiCall.new(user_key, {:what => :next}).call
     end
@@ -36,6 +42,7 @@ module Nozbe
     action :actions
     def parse(json)
       actions = super(json)
+      return [] if actions.nil?
       actions.collect do |raw_action|
         action = Action.new
         action.id = raw_action["id"]

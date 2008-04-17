@@ -3,6 +3,12 @@ require File.dirname(__FILE__) + "/spec_helper"
 describe Nozbe::Note do
   include NozbeSpecHelper
   
+  it "should list all notes" do
+    notes = Nozbe::Note.list(user_key)
+    notes.class.should eql(Array)
+    notes.first.class.should eql(Nozbe::Note)
+  end
+  
   it "should save itself" do
     new_note = Nozbe::Note.new()
     new_note.name = "new note"
