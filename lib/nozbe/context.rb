@@ -1,6 +1,15 @@
 module Nozbe
   class Context
+    DEFAULT_CONTEXT_NAME = "no context"
+
     attr_accessor :id, :name, :icon, :body, :body_show, :count
+    
+    def self.get_default_context(user_key)
+      contexts = list(user_key)
+      selected_contexts = contexts.select { |c| c.name.downcase == DEFAULT_CONTEXT_NAME }
+      selected_contexts.first if selected_contexts and !selected_contexts.empty?
+      contexts.first
+    end
     
     def self.list(user_key)
       ContextsListApiCall.new(user_key).call

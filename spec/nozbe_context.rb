@@ -7,6 +7,11 @@ describe Nozbe::Context do
     @context = Nozbe::Context.list(user_key).first
   end
   
+  it "should get a default context" do
+    default_context = Nozbe::Context.get_default_context(user_key)
+    default_context.class.should eql(Nozbe::Context)
+  end
+  
   it "should list all contexts" do
     contexts = Nozbe::Context.list(user_key)
     contexts.class.should eql(Array)

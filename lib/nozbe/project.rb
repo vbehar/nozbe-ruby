@@ -5,7 +5,7 @@ module Nozbe
     attr_accessor :id, :name, :body, :body_show, :count
     
     def self.get_default_project(user_key)
-      projects = ProjectsListApiCall.new(user_key).call
+      projects = list(user_key)
       selected_projects = projects.select { |p| p.name.downcase == DEFAULT_PROJECT_NAME }
       selected_projects.first if selected_projects and !selected_projects.empty?
       projects.first
