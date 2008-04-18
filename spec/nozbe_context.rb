@@ -19,10 +19,14 @@ describe Nozbe::Context do
     context.name.downcase.should eql(context_name.downcase)
   end
   
-  it "should get a context from its name even if the name is nil" do
+  it "should return nil when trying to get a context from its name when the name doesn't exists" do
+    context = Nozbe::Context.get_from_name(user_key, 'unknown and non existant context name')
+    context.should eql(nil)
+  end
+  
+  it "should return nil when trying to get a context from its name with a nil name" do
     context = Nozbe::Context.get_from_name(user_key, nil)
-    context.should_not eql(nil)
-    context.class.should eql(Nozbe::Context)
+    context.should eql(nil)
   end
   
   it "should list all contexts" do

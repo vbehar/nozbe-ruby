@@ -19,10 +19,14 @@ describe Nozbe::Project do
     project.name.downcase.should eql(project_name.downcase)
   end
   
-  it "should get a project from its name even if the name is nil" do
+  it "should return nil when trying to get a project from its name when the name doesn't exists" do
+    project = Nozbe::Project.get_from_name(user_key, 'unknown and non existant project name')
+    project.should eql(nil)
+  end
+  
+  it "should return nil when trying to get a project from its name with a nil name" do
     project = Nozbe::Project.get_from_name(user_key, nil)
-    project.should_not eql(nil)
-    project.class.should eql(Nozbe::Project)
+    project.should eql(nil)
   end
   
   it "should list all projects" do

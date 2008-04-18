@@ -9,14 +9,10 @@ module Nozbe
     end
     
     def self.get_from_name(user_key, context_name)
+      return nil if context_name.nil?
       contexts = list(user_key)
-      context_name = '' if context_name.nil?
       selected_contexts = contexts.select { |c| c.name.downcase == context_name.downcase }
-      if selected_contexts and !selected_contexts.empty?
-        selected_contexts.first
-      else
-        contexts.first
-      end
+      selected_contexts.first rescue nil
     end
     
     def self.list(user_key)
