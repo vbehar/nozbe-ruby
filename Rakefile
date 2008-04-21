@@ -8,7 +8,7 @@ require 'rake/gempackagetask'
 spec = Gem::Specification.new do |s|
   s.platform         =   Gem::Platform::RUBY
   s.name             =   "nozbe-ruby"
-  s.version          =   "0.1.0"
+  s.version          =   "0.2.0"
   s.author           =   "Vincent Behar"
   s.email            =   "v.behar@free.fr"
   s.homepage         =   "http://nozbe-ruby.rubyforge.org"
