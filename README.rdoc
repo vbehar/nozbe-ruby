@@ -1,0 +1,76 @@
+
+= nozbe-ruby
+
+http://nozbe-ruby.rubyforge.org
+
+nozbe-ruby is a simple ruby wrapper around the JSON-based Nozbe API.
+Nozbe is a GTD-webapp : http://www.nozbe.com
+
+This project is meant to be used as a lib in others ruby projects interacting with the Nozbe API.
+
+Dependencies :
+- json
+
+== Getting started
+
+=== Specs
+
+To run the specs :
+- rake spec:show => display all specs without running them
+- rake spec:run  => run the specs
+
+See spec/spec_helper.rb for Nozbe account configuration
+
+=== RDoc
+
+- rake rdoc
+
+=== Install
+
+From the sources :
+- rake
+- sudo gem install pkg/nozbe-ruby-VERSION.gem
+
+Or from rubygems :
+- sudo gem install nozbe-ruby
+
+=== Usage
+
+  require 'rubygems'
+  require 'nozbe'
+
+  # first, login to retrieve your API key
+  user = Nozbe::User.new("email", "password")
+  user.login
+
+  # play with your projects
+  projects = Nozbe::Project.list(user.key)
+  first_project = projects.first
+  first_project.load_info(user.key)
+  print "project name : #{first_project.name}"
+  associated_actions = first_project.get_actions(user.key)
+  associated_notes = first_project.get_notes(user.key)
+
+  # play with your actions
+  my_next_actions = Nozbe::Action.list_next(user.key)
+  first_action = my_next_actions.first
+  first_action.done!(user.key)
+  Nozbe::Action.done!(my_next_actions)
+
+  # create some new data
+  new_project = Nozbe::Project.new()
+  new_project.name = "new project"
+  new_project.body = "Hey, this is my first new project !"
+  new_project.save!(user.key)
+  print "and my new_project now has an ID : #{new_project.id}"
+
+  # and so on...
+
+== Sources
+
+You can get the source by using Git, either on the rubyforge or github repo :
+- git://rubyforge.org/nozbe-ruby.git
+- git://github.com/vbehar/nozbe-ruby.git : http://github.com/vbehar/nozbe-ruby
+
+  git clone REPO_URL
+

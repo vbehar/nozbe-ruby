@@ -2,3 +2,7 @@
 pkg
 # ignore netbeans files
 nbproject
+# ignore generated rdoc
+doc
+# ignore generated files
+.rake_tasks
